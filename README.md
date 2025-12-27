@@ -2,6 +2,8 @@
 
 一个基于纯静态技术的轻量级Markdown笔记博客系统，专为GitHub Pages设计。
 
+**GitHub 仓库**: [https://github.com/ItQianChen/online-notes](https://github.com/ItQianChen/online-notes)
+
 ## ✨ 特性
 
 - 📝 **Markdown支持**: 使用 [marked.js](https://marked.js.org/) 解析Markdown。
@@ -22,7 +24,7 @@
 
 1.  **克隆仓库**:
     ```bash
-    git clone https://github.com/your-username/note-md.git
+    git clone https://github.com/ItQianChen/online-notes.git
     cd note-md
     ```
 2.  **添加文章**: 在`posts/`目录下添加你的Markdown文件。

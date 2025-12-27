@@ -153,25 +153,57 @@
 .sidebar-footer {
     padding: 12px 16px;
     border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 8px;
 }
 
-.theme-toggle {
-    width: 100%;
-    padding: 10px 16px;
+.sidebar-footer-btn {
+    flex: 1;
+    padding: 10px 12px;
     border: 1px solid var(--border-color);
     background: var(--bg-color);
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--text-color);
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.sidebar-footer-btn:hover {
+    background: var(--hover-bg);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.sidebar-footer-btn svg {
+    flex-shrink: 0;
+}
+
+/* 保持向后兼容 */
+.theme-toggle {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-color);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
 }
 
 .theme-toggle:hover {
     background: var(--hover-bg);
     border-color: var(--primary-color);
+    color: var(--primary-color);
 }
