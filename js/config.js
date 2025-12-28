@@ -3,7 +3,7 @@
  */
 const BlogConfig = {
     // 博客标题
-    title: 'CY的笔记',
+    title: 'CY的笔记博客',
 
     // GitHub仓库配置（用于动态读取文件目录）
     github: {
