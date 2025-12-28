@@ -275,6 +275,9 @@ const TOC = {
             tocItems.forEach(item => {
                 if (item.dataset.target === targetId) {
                     item.classList.add('active');
+                    this.expandParents(item);
+                    // 确保可见
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 } else {
                     item.classList.remove('active');
                 }
@@ -290,17 +293,43 @@ const TOC = {
 
         headings.forEach(heading => {
             const rect = heading.getBoundingClientRect();
-            if (rect.top <= 100) {
+            // 适当放宽检测范围，确保首个标题也能被选中
+            if (rect.top <= 150) {
                 currentHeading = heading;
             }
         });
 
-        tocItems.forEach(item => {
-            if (currentHeading && item.dataset.target === currentHeading.id) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
+        if (currentHeading) {
+            tocItems.forEach(item => {
+                if (item.dataset.target === currentHeading.id) {
+                    if (!item.classList.contains('active')) {
+                        item.classList.add('active');
+                        this.expandParents(item);
+                        // 滚动时不需要 scrollIntoView，否则会和用户的滚动冲突
+                    }
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+    },
+
+    // 展开指定元素的父级目录
+    expandParents: function(element) {
+        let parent = element.parentElement; // li
+        while (parent) {
+            if (parent.classList.contains('toc-children')) {
+                parent.style.display = 'block';
+                // 找到对应的 li.toc-folder 并设为 open
+                const folderLi = parent.parentElement;
+                if (folderLi && folderLi.classList.contains('toc-folder')) {
+                    folderLi.classList.add('open');
+                    const toggle = folderLi.querySelector('.toc-toggle-icon');
+                    if (toggle) toggle.textContent = '▼';
+                }
             }
-        });
+            parent = parent.parentElement;
+            if (!parent || parent.id === 'toc-nav') break;
+        }
     }
 };

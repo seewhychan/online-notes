@@ -75,6 +75,15 @@ const Loader = {
                     path: relativePath,
                     fileType: 'pdf'
                 });
+            } else if (item.name.endsWith('.docx')) {
+                const relativePath = item.path.replace(/^posts\//, '');
+                result.push({
+                    type: 'file',
+                    name: item.name,
+                    title: item.name.replace(/\.docx$/, ''),
+                    path: relativePath,
+                    fileType: 'word'
+                });
             }
         }
 
@@ -98,6 +107,14 @@ const Loader = {
         if (filepath.endsWith('.pdf')) {
             return Promise.resolve({
                 type: 'pdf',
+                url: url
+            });
+        }
+
+        // 如果是Word文件，同样返回URL
+        if (filepath.endsWith('.docx')) {
+            return Promise.resolve({
+                type: 'word',
                 url: url
             });
         }

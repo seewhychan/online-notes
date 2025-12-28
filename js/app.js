@@ -18,6 +18,7 @@
             // 初始化各模块
             Markdown.init(this.elements.content);
             PDFRenderer.init(this.elements.content);
+            WordRenderer.init(this.elements.content);
             Sidebar.init();
             TOC.init();
             Mobile.init();
@@ -72,11 +73,14 @@
                 Sidebar.updateActiveLink(path);
                 Sidebar.expandParentFolders(path);
             } else {
+                // 先清理所有渲染器，防止清理逻辑误删欢迎页内容
+                PDFRenderer.cleanup();
+                WordRenderer.cleanup();
+
+                // 再显示欢迎页
                 Markdown.showWelcome();
                 Sidebar.updateActiveLink(null);
                 TOC.clear();
-                // 清理PDF渲染器
-                PDFRenderer.cleanup();
             }
         },
 
@@ -84,21 +88,29 @@
             Loader.loadPost(filepath)
                 .then(result => {
                     if (result.type === 'markdown') {
-                        // 清理PDF渲染器
+                        // 清理其他渲染器
                         PDFRenderer.cleanup();
+                        WordRenderer.cleanup();
                         // 渲染Markdown
                         Markdown.render(result.content);
                         TOC.generate(this.elements.content);
                     } else if (result.type === 'pdf') {
                         // 清理之前的内容
                         TOC.clear();
+                        WordRenderer.cleanup();
                         // 渲染PDF
                         PDFRenderer.render(result.url);
+                    } else if (result.type === 'word') {
+                        // 清理其他渲染器
+                        PDFRenderer.cleanup();
+                        // 渲染Word
+                        WordRenderer.render(result.url);
                     }
                 })
                 .catch(error => {
                     // 清理所有渲染器
                     PDFRenderer.cleanup();
+                    WordRenderer.cleanup();
                     Markdown.showError(error.message);
                     TOC.clear();
                 });

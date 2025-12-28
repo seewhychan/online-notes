@@ -36,6 +36,13 @@
   },
   {
     "type": "file",
+    "name": "一文掌握Markdown语法.docx",
+    "title": "一文掌握Markdown语法",
+    "path": "一文掌握Markdown语法.docx",
+    "fileType": "word"
+  },
+  {
+    "type": "file",
     "name": "Java开发13个建议.pdf",
     "title": "Java开发13个建议",
     "path": "Java开发13个建议.pdf",
