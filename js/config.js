@@ -8,9 +8,9 @@ const BlogConfig = {
     // GitHub仓库配置（用于动态读取文件目录）
     github: {
         // 仓库所有者（你的GitHub用户名）
-        owner: '',
+        owner: 'seewhychan',
         // 仓库名称
-        repo: '',
+        repo: 'online-notes',
         // 分支名称
         branch: 'main',
         // posts目录路径
@@ -18,7 +18,7 @@ const BlogConfig = {
     },
 
     // 是否使用GitHub API（设为false则使用本地posts.json）
-    useGitHubAPI: false,
+    useGitHubAPI: true,
 
     // 代码块配置
     codeBlock: {
