@@ -12,7 +12,7 @@ const BlogConfig = {
         // 仓库名称
         repo: 'online-notes',
         // 分支名称
-        branch: 'main',
+        branch: 'master',
         // posts目录路径
         postsPath: 'posts'
     },
