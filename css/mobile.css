@@ -133,23 +133,7 @@
         padding: 20px 16px;
     }
 
-    /* 右侧TOC - 移动端抽屉模式 */
-    .toc-sidebar {
-        display: flex;
-        position: fixed;
-        top: 56px;
-        right: -280px;
-        width: 280px;
-        height: calc(100vh - 56px);
-        z-index: 1000;
-        transition: right 0.3s ease;
-        border-left: 1px solid var(--border-color);
-    }
-
-    .toc-sidebar.mobile-open {
-        right: 0;
-    }
-
+    /* 右侧TOC - 由 toc.css 统一处理移动端样式 */
     .toc-toggle {
         display: none;
     }

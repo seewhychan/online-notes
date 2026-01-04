@@ -8,32 +8,58 @@
         "type": "file",
         "name": "css-flexbox.md",
         "title": "css-flexbox",
-        "path": "前端/css-flexbox.md"
+        "path": "前端/css-flexbox.md",
+        "fileType": "markdown"
       },
       {
         "type": "file",
         "name": "javascript-basics.md",
         "title": "javascript-basics",
-        "path": "前端/javascript-basics.md"
+        "path": "前端/javascript-basics.md",
+        "fileType": "markdown"
       }
     ]
   },
   {
     "type": "file",
+    "name": "面试题汇总.pdf",
+    "title": "面试题汇总",
+    "path": "面试题汇总.pdf",
+    "fileType": "pdf"
+  },
+  {
+    "type": "file",
     "name": "设计模式.md",
     "title": "设计模式",
-    "path": "设计模式.md"
+    "path": "设计模式.md",
+    "fileType": "markdown"
+  },
+  {
+    "type": "file",
+    "name": "一文掌握Markdown语法.docx",
+    "title": "一文掌握Markdown语法",
+    "path": "一文掌握Markdown语法.docx",
+    "fileType": "word"
+  },
+  {
+    "type": "file",
+    "name": "Java开发13个建议.pdf",
+    "title": "Java开发13个建议",
+    "path": "Java开发13个建议.pdf",
+    "fileType": "pdf"
   },
   {
     "type": "file",
     "name": "markdown-guide.md",
     "title": "markdown-guide",
-    "path": "markdown-guide.md"
+    "path": "markdown-guide.md",
+    "fileType": "markdown"
   },
   {
     "type": "file",
     "name": "welcome.md",
     "title": "welcome",
-    "path": "welcome.md"
+    "path": "welcome.md",
+    "fileType": "markdown"
   }
 ]

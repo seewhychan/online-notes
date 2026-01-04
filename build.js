@@ -10,10 +10,20 @@ const POSTS_DIR = './posts';
 const OUTPUT_FILE = './posts.json';
 
 /**
- * 从文件名生成显示标题（去掉.md后缀）
+ * 从文件名生成显示标题（去掉扩展名）
  */
 function getDisplayName(filename) {
-    return filename.replace(/\.md$/, '');
+    return filename.replace(/\.(md|pdf|docx)$/, '');
+}
+
+/**
+ * 获取文件类型
+ */
+function getFileType(filename) {
+    if (filename.endsWith('.md')) return 'markdown';
+    if (filename.endsWith('.pdf')) return 'pdf';
+    if (filename.endsWith('.docx')) return 'word';
+    return null;
 }
 
 /**
@@ -45,14 +55,18 @@ function scanDirectory(dir, basePath = '') {
                     children: children
                 });
             }
-        } else if (entry.name.endsWith('.md')) {
-            // Markdown文件 - 使用文件名作为显示名称
-            items.push({
-                type: 'file',
-                name: entry.name,
-                title: getDisplayName(entry.name),
-                path: relativePath
-            });
+        } else {
+            const fileType = getFileType(entry.name);
+            if (fileType) {
+                // Markdown或PDF文件
+                items.push({
+                    type: 'file',
+                    name: entry.name,
+                    title: getDisplayName(entry.name),
+                    path: relativePath,
+                    fileType: fileType
+                });
+            }
         }
     }
 

@@ -136,6 +136,9 @@ const ThemeManager = {
 
         // 应用CSS变量
         const root = document.documentElement;
+        // 设置 data-theme 属性，确保基于属性的选择器（如 [data-theme="dark"]）生效
+        root.setAttribute('data-theme', themeName);
+
         for (const [key, value] of Object.entries(theme.vars)) {
             root.style.setProperty(key, value);
         }
@@ -159,6 +162,8 @@ const ThemeManager = {
         this.currentTheme = 'custom';
 
         const root = document.documentElement;
+        root.setAttribute('data-theme', 'custom');
+
         for (const [key, value] of Object.entries(customVars)) {
             root.style.setProperty(key, value);
         }

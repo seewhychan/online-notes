@@ -1,0 +1,210 @@
+/**
+ * Word 文档渲染样式 - v3.2 深度主题适配与锐化版
+ */
+
+/* Word 激活状态下的全局布局调整 */
+body.word-active .content-wrapper {
+    background-color: var(--hover-bg) !important;
+    display: block !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+body.word-active .content {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* 恢复目录显示 */
+body.word-active .toc-sidebar,
+body.word-active .toc-toggle {
+    display: block !important;
+}
+
+/* Word 查看器主容器 */
+.word-viewer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Word 工具栏悬浮化 (极致精简窄版) */
+.word-toolbar {
+    position: absolute !important;
+    top: 20px;
+    right: 25px;
+    width: fit-content !important;
+    min-width: 120px;
+    z-index: 1000;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 40px;
+    padding: 2px 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"] .word-toolbar {
+    background: #252525;
+    border-color: #444;
+}
+
+.word-toolbar.collapsed {
+    transform: translateX(150%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.word-toolbar .pdf-toolbar-content {
+    justify-content: center;
+    min-width: unset;
+    padding: 4px;
+}
+
+.word-toolbar .pdf-controls {
+    gap: 4px;
+}
+
+.word-toolbar .pdf-btn {
+    padding: 2px 6px;
+    font-size: 11px;
+    height: 28px;
+    min-width: 28px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.word-toolbar .pdf-btn:hover {
+    background: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+.word-toolbar .pdf-zoom-level {
+    min-width: 32px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* 悬浮隐藏/展开按钮 (极致精简版) */
+.word-viewer .pdf-toolbar-toggle {
+    position: absolute !important;
+    top: 20px;
+    right: 25px;
+    z-index: 1001;
+    background: var(--primary-color);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.word-viewer .pdf-toolbar-toggle:hover {
+    transform: scale(1.1);
+    background: var(--link-color);
+}
+
+.word-viewer .pdf-toolbar-toggle.expanded {
+    background: #64748b;
+}
+
+/* Word 内容滚动容器 */
+.word-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--hover-bg);
+    padding: 20px;
+}
+
+/* Word 内容布局 */
+.word-content {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* docx-preview 组件深度适配与锐化 */
+.docx-wrapper {
+    width: fit-content !important;
+    max-width: none !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+.docx-viewer {
+    width: 100% !important;
+    max-width: 800px !important;
+    min-height: 100vh !important;
+    margin: 0 auto !important;
+    background: white !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 2px !important;
+    transition: transform 0.2s ease;
+
+    /* 解决缩放模糊的技术组合 */
+    image-rendering: auto; /* 移除非标准属性 -webkit-optimize-contrast 以修复验证错误 */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+/* 深色模式极致适配 - 强制穿透 Word 内部生成的样式 */
+[data-theme="dark"] .docx-viewer,
+[data-theme="nord"] .docx-viewer,
+[data-theme="dracula"] .docx-viewer {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .docx-viewer *:not(img),
+[data-theme="nord"] .docx-viewer *:not(img),
+[data-theme="dracula"] .docx-viewer *:not(img) {
+    /* 强制移除 Word 渲染出的内联白色背景，确保文字颜色可见 */
+    background-color: transparent !important;
+    color: inherit !important;
+    border-color: var(--border-color) !important;
+}
+
+/* 护眼模式适配 (Sepia/Solarized) - 保持柔和背景 */
+[data-theme="sepia"] .docx-viewer,
+[data-theme="solarized"] .docx-viewer {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+[data-theme="sepia"] .docx-viewer *:not(img),
+[data-theme="solarized"] .docx-viewer *:not(img) {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+[data-theme="dark"] .docx-viewer *:not(img) {
+    /* 强制移除 Word 渲染出的内联白色背景，确保文字颜色可见 */
+    background-color: transparent !important;
+    color: inherit !important;
+    border-color: #444 !important;
+}
